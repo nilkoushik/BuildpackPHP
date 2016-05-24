@@ -21,6 +21,15 @@ set -e
 #  python script.  However, this is here in case the
 #  build pack needs to do anything to bootstrap the
 #  python scripts, like install Python.
+  CLI_URL="https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/linuxx64_odbc_cli.tar.gz"
+
+  echo "Downloading IBM Data Server Driver...."
+  curl -LO "$CLI_URL"
+
+  # Extracting and Cleaning DS Driver
+  rm -rf clidriver
+  tar -xzf linuxx64_odbc_cli.tar.gz
+
 BP=$(dirname $(dirname $0))
 $BP/compile-extensions/bin/check_stack_support
 export PYTHONPATH=$BP/lib
