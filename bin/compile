@@ -21,6 +21,9 @@ set -e
 #  python script.  However, this is here in case the
 #  build pack needs to do anything to bootstrap the
 #  python scripts, like install Python.
+BUILD_DIR=$1
+CACHE_DIR=$2
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
   CLI_URL="https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/linuxx64_odbc_cli.tar.gz"
 
   echo "Downloading IBM Data Server Driver...."
