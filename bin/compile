@@ -32,6 +32,19 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
   # Extracting and Cleaning DS Driver
   rm -rf clidriver
   tar -xzf linuxx64_odbc_cli.tar.gz
+ cd $BUILD_DIR
+ln -s $BUILD_DIR/php /app/php
+  #Cleaning clidriver, m4 and autoconf
+  rm -rf linuxx64_odbc_cli.tar.gz
+  export IBM_DB_HOME=$BUILD_DIR/clidriver
+ echo "Installing ibm_db2 ..."
+  pecl install ibm_db2
+if [ -f clidriver/lib/libdb2.so ]; then
+  # we have from cache, just restore php's db2.so
+  echo "-------> restoring ibm_db2 from cache"
+  mv ibm_db2.so php/lib/php/extensions/no-debug-non-zts-20121212/
+  echo "-------> restored ibm_db2"
+fi
 
 BP=$(dirname $(dirname $0))
 $BP/compile-extensions/bin/check_stack_support
